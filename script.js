@@ -1,4 +1,3 @@
-// Populate the Unit dropdown
 const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
 const problemsContainer = document.getElementById("problemsContainer");
