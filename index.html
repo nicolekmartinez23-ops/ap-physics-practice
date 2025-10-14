@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP Physics 1 Practice Problems</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>AP Physics 1 Practice Problems</h1>
+
+  <div class="selectors">
+    <label for="unitSelect">Choose a Unit:</label>
+    <select id="unitSelect">
+      <option value="">-- Select Unit --</option>
+    </select>
+
+    <label for="topicSelect">Choose a Topic:</label>
+    <select id="topicSelect" disabled>
+      <option value="">-- Select Topic --</option>
+    </select>
+  </div>
+
+  <div id="problemsContainer"></div>
+
+  <script src="data/problems.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
