@@ -2,16 +2,8 @@ const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
 const problemsContainer = document.getElementById("problemsContainer");
 
-// Load all units from data
-function loadUnits() {
-  Object.keys(problemsData).forEach(unit => {
-    const opt = document.createElement("option");
-    opt.value = unit;
-    opt.textContent = unit;
-    unitSelect.appendChild(opt);
-  });
-}
-
+let currentUnit = "";
+let currentTopic = "";
 
 // Load units into dropdown
 function loadUnits() {
