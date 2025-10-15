@@ -1,11 +1,26 @@
+// Grab all dropdowns and container
 const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
+const actionSelect = document.getElementById("actionSelect");
 const problemsContainer = document.getElementById("problemsContainer");
 
 let currentUnit = "";
 let currentTopic = "";
 
-// Load units into dropdown
+// === Notes links (per Unit → Topic) ===
+const notesLinks = {
+  "Unit 1: Kinematics": {
+    "1D Motion": "https://example.com/unit1-1d-motion-notes.pdf",
+    "2D Motion": "https://example.com/unit1-2d-motion-notes.pdf"
+  },
+  "Unit 2: Dynamics": {
+    "Forces & Free-Body Diagrams": "https://example.com/unit2-forces-notes.pdf",
+    "Newton’s Laws": "https://example.com/unit2-newton-laws-notes.pdf"
+  }
+  // Add all remaining unit/topic links here
+};
+
+// === Load units into the dropdown ===
 function loadUnits() {
   Object.keys(problemsData).forEach(unit => {
     const opt = document.createElement("option");
@@ -15,15 +30,21 @@ function loadUnits() {
   });
 }
 
+// === Event: Unit selected ===
 unitSelect.addEventListener("change", () => {
-  const selectedUnit = unitSelect.value;
-  problemsContainer.innerHTML = "";
-  topicSelect.innerHTML = '<option value="">-- Select Topic --</option>';
-  currentUnit = selectedUnit;
+  currentUnit = unitSelect.value;
   currentTopic = "";
+  problemsContainer.innerHTML = "";
 
-  if (selectedUnit) {
-    const topics = Object.keys(problemsData[selectedUnit]);
+  // Reset topic dropdown
+  topicSelect.innerHTML = '<option value="">-- Select Topic --</option>';
+  topicSelect.disabled = true;
+
+  actionSelect.value = "";
+  actionSelect.disabled = true;
+
+  if (currentUnit) {
+    const topics = Object.keys(problemsData[currentUnit]);
     topics.forEach(topic => {
       const opt = document.createElement("option");
       opt.value = topic;
@@ -31,18 +52,37 @@ unitSelect.addEventListener("change", () => {
       topicSelect.appendChild(opt);
     });
     topicSelect.disabled = false;
-  } else {
-    topicSelect.disabled = true;
   }
 });
 
+// === Event: Topic selected ===
 topicSelect.addEventListener("change", () => {
-  currentUnit = unitSelect.value;
   currentTopic = topicSelect.value;
-  renderProblems(currentUnit, currentTopic);
+  problemsContainer.innerHTML = "";
+
+  actionSelect.value = "";
+  actionSelect.disabled = !(currentUnit && currentTopic);
 });
 
-// === Main function to render problems ===
+// === Event: Action selected (Notes or Practice) ===
+actionSelect.addEventListener("change", () => {
+  const action = actionSelect.value;
+
+  if (action === "notes") {
+    const link = notesLinks[currentUnit]?.[currentTopic];
+    if (link) {
+      window.open(link, "_blank");
+    } else {
+      alert("Notes not available for this topic yet.");
+    }
+  } else if (action === "practice") {
+    renderProblems(currentUnit, currentTopic);
+  }
+
+  actionSelect.value = ""; // reset selection after action
+});
+
+// === Render problems for a topic ===
 function renderProblems(unit, topic) {
   problemsContainer.innerHTML = "";
 
@@ -54,7 +94,7 @@ function renderProblems(unit, topic) {
     return;
   }
 
-  // Generate fresh problems
+  // Generate fresh problems if they are functions
   const problems = topicProblems.map(prob =>
     typeof prob === "function" ? prob() : prob
   );
@@ -80,7 +120,7 @@ function renderProblems(unit, topic) {
   });
 }
 
-// === Answer Checking ===
+// === Answer checking with numeric tolerance ===
 function checkAnswer(index, correctAnswer) {
   const input = document.getElementById(`answer-${index}`).value.trim();
   const feedback = document.getElementById(`feedback-${index}`);
@@ -106,4 +146,5 @@ function checkAnswer(index, correctAnswer) {
   }
 }
 
+// === Initialize page ===
 loadUnits();
