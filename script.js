@@ -39,14 +39,23 @@ topicSelect.addEventListener("change", () => {
   problemsContainer.innerHTML = "";
 
   if (unit && topic) {
-    const problems = problemsData[unit][topic];
+    // Generate or use existing problems
+    const problems = problemsData[unit][topic].map(prob =>
+      typeof prob === "function" ? prob() : prob
+    );
+
+    if (problems.length === 0) {
+      problemsContainer.innerHTML = "<p>No problems available yet.</p>";
+      return;
+    }
+
     problems.forEach((prob, index) => {
       const div = document.createElement("div");
       div.className = "problem";
       div.innerHTML = `
         <p><strong>Problem ${index + 1}:</strong> ${prob.question}</p>
         <input type="text" id="answer-${index}" placeholder="Answer">
-        <button onclick="checkAnswer('${unit}', '${topic}', ${index})">Check Answer</button>
+        <button onclick="checkAnswer('${unit}', '${topic}', ${index}, '${prob.answer}')">Check Answer</button>
         <div id="feedback-${index}" class="feedback"></div>
       `;
       problemsContainer.appendChild(div);
@@ -55,12 +64,24 @@ topicSelect.addEventListener("change", () => {
 });
 
 // Check answers
-function checkAnswer(unit, topic, index) {
+function checkAnswer(unit, topic, index, correctAnswer) {
   const input = document.getElementById(`answer-${index}`).value.trim();
-  const correct = problemsData[unit][topic][index].answer;
   const feedback = document.getElementById(`feedback-${index}`);
 
-  if (input === correct) {
+  // Tolerant numeric comparison
+  const numericInput = parseFloat(input);
+  const numericCorrect = parseFloat(correctAnswer);
+
+  if (!isNaN(numericInput) && !isNaN(numericCorrect)) {
+    const diff = Math.abs(numericInput - numericCorrect);
+    if (diff < 0.05) {
+      feedback.textContent = "✅ Correct!";
+      feedback.className = "feedback correct";
+      return;
+    }
+  }
+
+  if (input.toLowerCase() === correctAnswer.toLowerCase()) {
     feedback.textContent = "✅ Correct!";
     feedback.className = "feedback correct";
   } else {
