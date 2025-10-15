@@ -1,71 +1,77 @@
 // === AP Physics 1 Problems Data ===
-// Each topic has an empty array, ready for you to add static or generated problems.
-// You can use either:
-//   { question: "text", answer: "text" }
-// or random-generating functions that return { question, answer } objects.
+// Topics pulled directly from the uploaded "AP Physics 1 Topics.txt".
+// Each topic array is empty (ready for static problems or generator functions).
 
 const problemsData = {
   "Unit 1: Kinematics": {
-    "1D Motion": [],
-    "2D Motion and Projectile Motion": [],
-    "Graphical Analysis": [],
-    "Relative Motion": []
+    "1D Scalars and Vectors": [],
+    "Displacement, Velocity, Acceleration": [],
+    "Representing Motion": [],
+    "Reference Frames and Relative Motion": [],
+    "Vectors and Motion in 2D": []
   },
 
   "Unit 2: Dynamics": {
-    "Forces and Newton’s Laws": [],
-    "Free-Body Diagrams": [],
-    "Friction": [],
-    "Tension and Normal Force": [],
-    "Equilibrium and Net Force": []
+    "Systems and Centers of Mass": [],
+    "Forces and Free Body Diagrams": [],
+    "Newton's Third Law": [],
+    "Newton's First Law": [],
+    "Newton's Second Law": [],
+    "Gravitational Force": [],
+    "Kinetic and Static Friction": [],
+    "Spring Forces": [],
+    "Circular Motion": []
   },
 
   "Unit 3: Work, Energy, and Power": {
-    "Work and the Work-Energy Theorem": [],
-    "Kinetic and Potential Energy": [],
+    "Translational Kinetic Energy": [],
+    "Work": [],
+    "Potential Energy": [],
     "Conservation of Energy": [],
     "Power": []
   },
 
   "Unit 4: Linear Momentum": {
-    "Impulse and Momentum": [],
+    "Linear Momentum": [],
+    "Change in Momentum and Impulse": [],
     "Conservation of Linear Momentum": [],
-    "Elastic and Inelastic Collisions": [],
-    "Center of Mass": []
+    "Elastic and Inelastic Collisions": []
   },
 
   "Unit 5: Torque and Rotational Dynamics": {
     "Rotational Kinematics": [],
-    "Torque and Rotational Equilibrium": [],
-    "Moment of Inertia": [],
-    "Newton’s Second Law for Rotation": []
+    "Connecting Linear and Rotational Motion": [],
+    "Torque": [],
+    "Rotational Inertia": [],
+    "Newton's First Law for Rotation": [],
+    "Newton's Second Law for Rotation": []
   },
 
   "Unit 6: Energy and Momentum of Rotating Systems": {
-    "Rotational Kinetic Energy": [],
-    "Work and Power in Rotational Motion": [],
-    "Angular Momentum and Its Conservation": []
+    "Rotating Kinetic Energy": [],
+    "Torque and Work": [],
+    "Angular Momentum and Angular Impulse": [],
+    "Conservation of Angular Momentum": [],
+    "Rolling": [],
+    "Motion of Orbiting Satellites": []
   },
 
   "Unit 7: Oscillations": {
-    "Simple Harmonic Motion": [],
-    "Mass-Spring Systems": [],
-    "Pendulums": [],
-    "Energy in SHM": [],
-    "Period and Frequency Relationships": []
+    "Defining Simple Harmonic Motion": [],
+    "Frequency and Period of SHM": [],
+    "Representing and Analyzing SHM": [],
+    "Energy of Simple Harmonic Oscillators": []
   },
 
   "Unit 8: Fluids": {
-    "Density and Pressure": [],
-    "Buoyant Force and Archimedes’ Principle": [],
-    "Fluid Statics": [],
-    "Fluid Dynamics and the Continuity Equation": [],
-    "Bernoulli’s Principle": []
+    "Internal Structure and Density": [],
+    "Pressure": [],
+    "Fluids and Newton's Laws": [],
+    "Fluids and Conservation Laws": []
   }
 };
 
-// === Helper Function to Add Problems (Optional) ===
-// You can use this function to add problems later from other files if you prefer.
+// Optional helper to add problems programmatically
 function addProblems(unit, topicProblems) {
   if (!problemsData[unit]) problemsData[unit] = {};
   Object.entries(topicProblems).forEach(([topic, problems]) => {
