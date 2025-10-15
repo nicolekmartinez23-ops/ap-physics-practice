@@ -72,3 +72,18 @@ button:hover {
 .incorrect {
   color: red;
 }
+.regen-button {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 14px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.regen-button:hover {
+  background-color: #005fa3;
+}
