@@ -1,4 +1,4 @@
-// Grab all dropdowns and container
+// === Element References ===
 const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
 const actionSelect = document.getElementById("actionSelect");
@@ -8,43 +8,71 @@ const problemsContainer = document.getElementById("problemsContainer");
 let currentUnit = "";
 let currentTopic = "";
 
-// === Notes links (Unit → Topic → PDF link) ===
+// === Notes Links (auto-generated placeholder structure) ===
+// Format: notes/unit1-1d-motion.pdf
+// Replace links with your actual PDF files in the /notes folder.
+
 const notesLinks = {
   "Unit 1: Kinematics": {
     "1D Motion": "notes/unit1-1d-motion.pdf",
-    "2D Motion": "notes/unit1-2d-motion.pdf"
+    "2D Motion and Projectile Motion": "notes/unit1-2d-motion-and-projectile-motion.pdf",
+    "Graphical Analysis": "notes/unit1-graphical-analysis.pdf",
+    "Relative Motion": "notes/unit1-relative-motion.pdf"
   },
+
   "Unit 2: Dynamics": {
-    "Forces & Free-Body Diagrams": "notes/unit2-forces.pdf",
-    "Newton’s Laws": "notes/unit2-newton-laws.pdf"
+    "Forces and Newton’s Laws": "notes/unit2-forces-and-newtons-laws.pdf",
+    "Free-Body Diagrams": "notes/unit2-free-body-diagrams.pdf",
+    "Friction": "notes/unit2-friction.pdf",
+    "Tension and Normal Force": "notes/unit2-tension-and-normal-force.pdf",
+    "Equilibrium and Net Force": "notes/unit2-equilibrium-and-net-force.pdf"
   },
+
   "Unit 3: Work, Energy, and Power": {
-    "Work & Kinetic Energy": "notes/unit3-work-kinetic.pdf",
-    "Potential Energy": "notes/unit3-potential.pdf"
+    "Work and the Work-Energy Theorem": "notes/unit3-work-and-the-work-energy-theorem.pdf",
+    "Kinetic and Potential Energy": "notes/unit3-kinetic-and-potential-energy.pdf",
+    "Conservation of Energy": "notes/unit3-conservation-of-energy.pdf",
+    "Power": "notes/unit3-power.pdf"
   },
+
   "Unit 4: Linear Momentum": {
-    "Momentum Conservation": "notes/unit4-momentum.pdf",
-    "Impulse": "notes/unit4-impulse.pdf"
+    "Impulse and Momentum": "notes/unit4-impulse-and-momentum.pdf",
+    "Conservation of Linear Momentum": "notes/unit4-conservation-of-linear-momentum.pdf",
+    "Elastic and Inelastic Collisions": "notes/unit4-elastic-and-inelastic-collisions.pdf",
+    "Center of Mass": "notes/unit4-center-of-mass.pdf"
   },
+
   "Unit 5: Torque and Rotational Dynamics": {
-    "Torque & Rotational Motion": "notes/unit5-torque.pdf",
-    "Rotational Dynamics": "notes/unit5-rotational.pdf"
+    "Rotational Kinematics": "notes/unit5-rotational-kinematics.pdf",
+    "Torque and Rotational Equilibrium": "notes/unit5-torque-and-rotational-equilibrium.pdf",
+    "Moment of Inertia": "notes/unit5-moment-of-inertia.pdf",
+    "Newton’s Second Law for Rotation": "notes/unit5-newtons-second-law-for-rotation.pdf"
   },
+
   "Unit 6: Energy and Momentum of Rotating Systems": {
-    "Rotational Energy": "notes/unit6-energy.pdf",
-    "Angular Momentum": "notes/unit6-angular.pdf"
+    "Rotational Kinetic Energy": "notes/unit6-rotational-kinetic-energy.pdf",
+    "Work and Power in Rotational Motion": "notes/unit6-work-and-power-in-rotational-motion.pdf",
+    "Angular Momentum and Its Conservation": "notes/unit6-angular-momentum-and-its-conservation.pdf"
   },
+
   "Unit 7: Oscillations": {
-    "Simple Harmonic Motion": "notes/unit7-shm.pdf",
-    "Pendulums & Springs": "notes/unit7-pendulum.pdf"
+    "Simple Harmonic Motion": "notes/unit7-simple-harmonic-motion.pdf",
+    "Mass-Spring Systems": "notes/unit7-mass-spring-systems.pdf",
+    "Pendulums": "notes/unit7-pendulums.pdf",
+    "Energy in SHM": "notes/unit7-energy-in-shm.pdf",
+    "Period and Frequency Relationships": "notes/unit7-period-and-frequency-relationships.pdf"
   },
+
   "Unit 8: Fluids": {
-    "Fluid Statics": "notes/unit8-statics.pdf",
-    "Fluid Dynamics": "notes/unit8-dynamics.pdf"
+    "Density and Pressure": "notes/unit8-density-and-pressure.pdf",
+    "Buoyant Force and Archimedes’ Principle": "notes/unit8-buoyant-force-and-archimedes-principle.pdf",
+    "Fluid Statics": "notes/unit8-fluid-statics.pdf",
+    "Fluid Dynamics and the Continuity Equation": "notes/unit8-fluid-dynamics-and-the-continuity-equation.pdf",
+    "Bernoulli’s Principle": "notes/unit8-bernoullis-principle.pdf"
   }
 };
 
-// === Load units into the dropdown ===
+// === Load Units into Dropdown ===
 function loadUnits() {
   Object.keys(problemsData).forEach(unit => {
     const opt = document.createElement("option");
@@ -54,13 +82,12 @@ function loadUnits() {
   });
 }
 
-// === Event: Unit selected ===
+// === Event: Unit Selected ===
 unitSelect.addEventListener("change", () => {
   currentUnit = unitSelect.value;
   currentTopic = "";
   problemsContainer.innerHTML = "";
 
-  // Reset topic dropdown
   topicSelect.innerHTML = '<option value="">-- Select Topic --</option>';
   topicSelect.disabled = true;
 
@@ -82,7 +109,7 @@ unitSelect.addEventListener("change", () => {
   }
 });
 
-// === Event: Topic selected ===
+// === Event: Topic Selected ===
 topicSelect.addEventListener("change", () => {
   currentTopic = topicSelect.value;
   problemsContainer.innerHTML = "";
@@ -94,7 +121,7 @@ topicSelect.addEventListener("change", () => {
   numProblemsSelect.disabled = true;
 });
 
-// === Event: Action selected (Notes or Practice) ===
+// === Event: Action Selected (Notes or Practice) ===
 actionSelect.addEventListener("change", () => {
   const action = actionSelect.value;
 
@@ -105,17 +132,17 @@ actionSelect.addEventListener("change", () => {
     } else {
       alert("Notes not available for this topic yet.");
     }
-    numProblemsSelect.disabled = true; // disable number selector for notes
+    numProblemsSelect.disabled = true;
   } else if (action === "practice") {
-    numProblemsSelect.disabled = false; // enable number selector
-    numProblemsSelect.value = "1"; // default to 1 problem
+    numProblemsSelect.disabled = false;
+    numProblemsSelect.value = "1"; // Default 1 problem
     renderProblems(currentUnit, currentTopic, 1);
   }
 
-  actionSelect.value = ""; // reset selection after action
+  actionSelect.value = "";
 });
 
-// === Event: Number of Problems selected ===
+// === Event: Number of Problems Selected ===
 numProblemsSelect.addEventListener("change", () => {
   const num = parseInt(numProblemsSelect.value);
   if (currentUnit && currentTopic && num) {
@@ -123,7 +150,7 @@ numProblemsSelect.addEventListener("change", () => {
   }
 });
 
-// === Render problems for a topic ===
+// === Render Problems ===
 function renderProblems(unit, topic, numProblems = 1) {
   problemsContainer.innerHTML = "";
 
@@ -135,22 +162,19 @@ function renderProblems(unit, topic, numProblems = 1) {
     return;
   }
 
-  // Generate requested number of problems
   const problems = [];
   for (let i = 0; i < numProblems; i++) {
-    const probTemplate = topicProblems[i % topicProblems.length]; // cycle if fewer templates
+    const probTemplate = topicProblems[i % topicProblems.length];
     const prob = typeof probTemplate === "function" ? probTemplate() : probTemplate;
     problems.push(prob);
   }
 
-  // "Generate New Problems" button
   const regenBtn = document.createElement("button");
   regenBtn.textContent = "🔄 Generate New Problems";
   regenBtn.className = "regen-button";
   regenBtn.addEventListener("click", () => renderProblems(unit, topic, numProblems));
   problemsContainer.appendChild(regenBtn);
 
-  // Render each problem
   problems.forEach((prob, index) => {
     const div = document.createElement("div");
     div.className = "problem";
@@ -164,7 +188,7 @@ function renderProblems(unit, topic, numProblems = 1) {
   });
 }
 
-// === Answer checking with numeric tolerance ===
+// === Answer Checking (Numeric Tolerance ±0.05) ===
 function checkAnswer(index, correctAnswer) {
   const input = document.getElementById(`answer-${index}`).value.trim();
   const feedback = document.getElementById(`feedback-${index}`);
@@ -190,5 +214,5 @@ function checkAnswer(index, correctAnswer) {
   }
 }
 
-// === Initialize page ===
+// === Initialize Page ===
 loadUnits();
