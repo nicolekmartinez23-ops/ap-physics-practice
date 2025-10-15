@@ -2,9 +2,6 @@ const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
 const problemsContainer = document.getElementById("problemsContainer");
 
-let currentUnit = "";
-let currentTopic = "";
-
 // Load units into dropdown
 function loadUnits() {
   Object.keys(problemsData).forEach(unit => {
@@ -107,3 +104,4 @@ function checkAnswer(index, correctAnswer) {
 }
 
 loadUnits();
+
