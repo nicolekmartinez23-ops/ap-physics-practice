@@ -7,17 +7,40 @@ const problemsContainer = document.getElementById("problemsContainer");
 let currentUnit = "";
 let currentTopic = "";
 
-// === Notes links (per Unit → Topic) ===
+// === Notes links (Unit → Topic → PDF link) ===
 const notesLinks = {
   "Unit 1: Kinematics": {
-    "1D Motion": "https://example.com/unit1-1d-motion-notes.pdf",
-    "2D Motion": "https://example.com/unit1-2d-motion-notes.pdf"
+    "1D Motion": "notes/unit1-1d-motion.pdf",
+    "2D Motion": "notes/unit1-2d-motion.pdf"
   },
   "Unit 2: Dynamics": {
-    "Forces & Free-Body Diagrams": "https://example.com/unit2-forces-notes.pdf",
-    "Newton’s Laws": "https://example.com/unit2-newton-laws-notes.pdf"
+    "Forces & Free-Body Diagrams": "notes/unit2-forces.pdf",
+    "Newton’s Laws": "notes/unit2-newton-laws.pdf"
+  },
+  "Unit 3: Work, Energy, and Power": {
+    "Work & Kinetic Energy": "notes/unit3-work-kinetic.pdf",
+    "Potential Energy": "notes/unit3-potential.pdf"
+  },
+  "Unit 4: Linear Momentum": {
+    "Momentum Conservation": "notes/unit4-momentum.pdf",
+    "Impulse": "notes/unit4-impulse.pdf"
+  },
+  "Unit 5: Torque and Rotational Dynamics": {
+    "Torque & Rotational Motion": "notes/unit5-torque.pdf",
+    "Rotational Dynamics": "notes/unit5-rotational.pdf"
+  },
+  "Unit 6: Energy and Momentum of Rotating Systems": {
+    "Rotational Energy": "notes/unit6-energy.pdf",
+    "Angular Momentum": "notes/unit6-angular.pdf"
+  },
+  "Unit 7: Oscillations": {
+    "Simple Harmonic Motion": "notes/unit7-shm.pdf",
+    "Pendulums & Springs": "notes/unit7-pendulum.pdf"
+  },
+  "Unit 8: Fluids": {
+    "Fluid Statics": "notes/unit8-statics.pdf",
+    "Fluid Dynamics": "notes/unit8-dynamics.pdf"
   }
-  // Add all remaining unit/topic links here
 };
 
 // === Load units into the dropdown ===
