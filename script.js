@@ -8,67 +8,74 @@ const problemsContainer = document.getElementById("problemsContainer");
 let currentUnit = "";
 let currentTopic = "";
 
-// === Notes Links (auto-generated placeholder structure) ===
-// Format: notes/unit1-1d-motion.pdf
-// Replace links with your actual PDF files in the /notes folder.
-
+// === Notes Links (placeholder filenames, lowercase + hyphens) ===
+// Filenames generated manually to match each topic (lowercase, spaces -> hyphens)
 const notesLinks = {
   "Unit 1: Kinematics": {
-    "1D Motion": "notes/unit1-1d-motion.pdf",
-    "2D Motion and Projectile Motion": "notes/unit1-2d-motion-and-projectile-motion.pdf",
-    "Graphical Analysis": "notes/unit1-graphical-analysis.pdf",
-    "Relative Motion": "notes/unit1-relative-motion.pdf"
+    "1D Scalars and Vectors": "notes/unit1-1d-scalars-and-vectors.pdf",
+    "Displacement, Velocity, Acceleration": "notes/unit1-displacement-velocity-acceleration.pdf",
+    "Representing Motion": "notes/unit1-representing-motion.pdf",
+    "Reference Frames and Relative Motion": "notes/unit1-reference-frames-and-relative-motion.pdf",
+    "Vectors and Motion in 2D": "notes/unit1-vectors-and-motion-in-2d.pdf"
   },
 
   "Unit 2: Dynamics": {
-    "Forces and Newton’s Laws": "notes/unit2-forces-and-newtons-laws.pdf",
-    "Free-Body Diagrams": "notes/unit2-free-body-diagrams.pdf",
-    "Friction": "notes/unit2-friction.pdf",
-    "Tension and Normal Force": "notes/unit2-tension-and-normal-force.pdf",
-    "Equilibrium and Net Force": "notes/unit2-equilibrium-and-net-force.pdf"
+    "Systems and Centers of Mass": "notes/unit2-systems-and-centers-of-mass.pdf",
+    "Forces and Free Body Diagrams": "notes/unit2-forces-and-free-body-diagrams.pdf",
+    "Newton's Third Law": "notes/unit2-newtons-third-law.pdf",
+    "Newton's First Law": "notes/unit2-newtons-first-law.pdf",
+    "Newton's Second Law": "notes/unit2-newtons-second-law.pdf",
+    "Gravitational Force": "notes/unit2-gravitational-force.pdf",
+    "Kinetic and Static Friction": "notes/unit2-kinetic-and-static-friction.pdf",
+    "Spring Forces": "notes/unit2-spring-forces.pdf",
+    "Circular Motion": "notes/unit2-circular-motion.pdf"
   },
 
   "Unit 3: Work, Energy, and Power": {
-    "Work and the Work-Energy Theorem": "notes/unit3-work-and-the-work-energy-theorem.pdf",
-    "Kinetic and Potential Energy": "notes/unit3-kinetic-and-potential-energy.pdf",
+    "Translational Kinetic Energy": "notes/unit3-translational-kinetic-energy.pdf",
+    "Work": "notes/unit3-work.pdf",
+    "Potential Energy": "notes/unit3-potential-energy.pdf",
     "Conservation of Energy": "notes/unit3-conservation-of-energy.pdf",
     "Power": "notes/unit3-power.pdf"
   },
 
   "Unit 4: Linear Momentum": {
-    "Impulse and Momentum": "notes/unit4-impulse-and-momentum.pdf",
+    "Linear Momentum": "notes/unit4-linear-momentum.pdf",
+    "Change in Momentum and Impulse": "notes/unit4-change-in-momentum-and-impulse.pdf",
     "Conservation of Linear Momentum": "notes/unit4-conservation-of-linear-momentum.pdf",
-    "Elastic and Inelastic Collisions": "notes/unit4-elastic-and-inelastic-collisions.pdf",
-    "Center of Mass": "notes/unit4-center-of-mass.pdf"
+    "Elastic and Inelastic Collisions": "notes/unit4-elastic-and-inelastic-collisions.pdf"
   },
 
   "Unit 5: Torque and Rotational Dynamics": {
     "Rotational Kinematics": "notes/unit5-rotational-kinematics.pdf",
-    "Torque and Rotational Equilibrium": "notes/unit5-torque-and-rotational-equilibrium.pdf",
-    "Moment of Inertia": "notes/unit5-moment-of-inertia.pdf",
-    "Newton’s Second Law for Rotation": "notes/unit5-newtons-second-law-for-rotation.pdf"
+    "Connecting Linear and Rotational Motion": "notes/unit5-connecting-linear-and-rotational-motion.pdf",
+    "Torque": "notes/unit5-torque.pdf",
+    "Rotational Inertia": "notes/unit5-rotational-inertia.pdf",
+    "Newton's First Law for Rotation": "notes/unit5-newtons-first-law-for-rotation.pdf",
+    "Newton's Second Law for Rotation": "notes/unit5-newtons-second-law-for-rotation.pdf"
   },
 
   "Unit 6: Energy and Momentum of Rotating Systems": {
-    "Rotational Kinetic Energy": "notes/unit6-rotational-kinetic-energy.pdf",
-    "Work and Power in Rotational Motion": "notes/unit6-work-and-power-in-rotational-motion.pdf",
-    "Angular Momentum and Its Conservation": "notes/unit6-angular-momentum-and-its-conservation.pdf"
+    "Rotating Kinetic Energy": "notes/unit6-rotating-kinetic-energy.pdf",
+    "Torque and Work": "notes/unit6-torque-and-work.pdf",
+    "Angular Momentum and Angular Impulse": "notes/unit6-angular-momentum-and-angular-impulse.pdf",
+    "Conservation of Angular Momentum": "notes/unit6-conservation-of-angular-momentum.pdf",
+    "Rolling": "notes/unit6-rolling.pdf",
+    "Motion of Orbiting Satellites": "notes/unit6-motion-of-orbiting-satellites.pdf"
   },
 
   "Unit 7: Oscillations": {
-    "Simple Harmonic Motion": "notes/unit7-simple-harmonic-motion.pdf",
-    "Mass-Spring Systems": "notes/unit7-mass-spring-systems.pdf",
-    "Pendulums": "notes/unit7-pendulums.pdf",
-    "Energy in SHM": "notes/unit7-energy-in-shm.pdf",
-    "Period and Frequency Relationships": "notes/unit7-period-and-frequency-relationships.pdf"
+    "Defining Simple Harmonic Motion": "notes/unit7-defining-simple-harmonic-motion.pdf",
+    "Frequency and Period of SHM": "notes/unit7-frequency-and-period-of-shm.pdf",
+    "Representing and Analyzing SHM": "notes/unit7-representing-and-analyzing-shm.pdf",
+    "Energy of Simple Harmonic Oscillators": "notes/unit7-energy-of-simple-harmonic-oscillators.pdf"
   },
 
   "Unit 8: Fluids": {
-    "Density and Pressure": "notes/unit8-density-and-pressure.pdf",
-    "Buoyant Force and Archimedes’ Principle": "notes/unit8-buoyant-force-and-archimedes-principle.pdf",
-    "Fluid Statics": "notes/unit8-fluid-statics.pdf",
-    "Fluid Dynamics and the Continuity Equation": "notes/unit8-fluid-dynamics-and-the-continuity-equation.pdf",
-    "Bernoulli’s Principle": "notes/unit8-bernoullis-principle.pdf"
+    "Internal Structure and Density": "notes/unit8-internal-structure-and-density.pdf",
+    "Pressure": "notes/unit8-pressure.pdf",
+    "Fluids and Newton's Laws": "notes/unit8-fluids-and-newtons-laws.pdf",
+    "Fluids and Conservation Laws": "notes/unit8-fluids-and-conservation-laws.pdf"
   }
 };
 
