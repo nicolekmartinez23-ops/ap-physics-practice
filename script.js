@@ -2,6 +2,7 @@
 const unitSelect = document.getElementById("unitSelect");
 const topicSelect = document.getElementById("topicSelect");
 const actionSelect = document.getElementById("actionSelect");
+const numProblemsSelect = document.getElementById("numProblemsSelect");
 const problemsContainer = document.getElementById("problemsContainer");
 
 let currentUnit = "";
@@ -66,6 +67,9 @@ unitSelect.addEventListener("change", () => {
   actionSelect.value = "";
   actionSelect.disabled = true;
 
+  numProblemsSelect.value = "";
+  numProblemsSelect.disabled = true;
+
   if (currentUnit) {
     const topics = Object.keys(problemsData[currentUnit]);
     topics.forEach(topic => {
@@ -85,6 +89,9 @@ topicSelect.addEventListener("change", () => {
 
   actionSelect.value = "";
   actionSelect.disabled = !(currentUnit && currentTopic);
+
+  numProblemsSelect.value = "";
+  numProblemsSelect.disabled = true;
 });
 
 // === Event: Action selected (Notes or Practice) ===
@@ -98,15 +105,26 @@ actionSelect.addEventListener("change", () => {
     } else {
       alert("Notes not available for this topic yet.");
     }
+    numProblemsSelect.disabled = true; // disable number selector for notes
   } else if (action === "practice") {
-    renderProblems(currentUnit, currentTopic);
+    numProblemsSelect.disabled = false; // enable number selector
+    numProblemsSelect.value = "1"; // default to 1 problem
+    renderProblems(currentUnit, currentTopic, 1);
   }
 
   actionSelect.value = ""; // reset selection after action
 });
 
+// === Event: Number of Problems selected ===
+numProblemsSelect.addEventListener("change", () => {
+  const num = parseInt(numProblemsSelect.value);
+  if (currentUnit && currentTopic && num) {
+    renderProblems(currentUnit, currentTopic, num);
+  }
+});
+
 // === Render problems for a topic ===
-function renderProblems(unit, topic) {
+function renderProblems(unit, topic, numProblems = 1) {
   problemsContainer.innerHTML = "";
 
   if (!unit || !topic) return;
@@ -117,16 +135,19 @@ function renderProblems(unit, topic) {
     return;
   }
 
-  // Generate fresh problems if they are functions
-  const problems = topicProblems.map(prob =>
-    typeof prob === "function" ? prob() : prob
-  );
+  // Generate requested number of problems
+  const problems = [];
+  for (let i = 0; i < numProblems; i++) {
+    const probTemplate = topicProblems[i % topicProblems.length]; // cycle if fewer templates
+    const prob = typeof probTemplate === "function" ? probTemplate() : probTemplate;
+    problems.push(prob);
+  }
 
-  // Create "Generate New Problems" button
+  // "Generate New Problems" button
   const regenBtn = document.createElement("button");
   regenBtn.textContent = "🔄 Generate New Problems";
   regenBtn.className = "regen-button";
-  regenBtn.addEventListener("click", () => renderProblems(unit, topic));
+  regenBtn.addEventListener("click", () => renderProblems(unit, topic, numProblems));
   problemsContainer.appendChild(regenBtn);
 
   // Render each problem
