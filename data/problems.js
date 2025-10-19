@@ -1,17 +1,23 @@
 // === AP Physics 1 Problems Data ===
-// Topics pulled directly from the uploaded "AP Physics 1 Topics.txt".
-// Each topic array is empty (ready for static problems or generator functions).
+// Each topic array is ready for static problems or dynamic generators.
 
 const problemsData = {
+  // -------------------------------------------------------
+  // Unit 1: Kinematics
+  // -------------------------------------------------------
   "Unit 1: Kinematics": {
     "1D Scalars and Vectors": [],
     "Displacement, Velocity, Acceleration": [],
     "Representing Motion": [],
     "Reference Frames and Relative Motion": [],
     "Vectors and Motion in 2D": []
-  },
+  }
+};
 
-  // === Partial Update: Unit 2 (Dynamics) ===
+// -------------------------------------------------------
+// === Unit 2: Dynamics ===
+// -------------------------------------------------------
+
 // Interactive problem templates based on your Sample Unit 2 Problems Template.txt
 // Students type numeric/symbolic answers; conceptual questions use multiple choice.
 
@@ -28,7 +34,6 @@ problemsData["Unit 2: Dynamics"]["Forces and Free Body Diagrams"] = [
     const angle = [0, 15, 30, 45][Math.floor(Math.random() * 4)];
     const g = 9.8;
     const weight = (m * g).toFixed(1);
-    const netForce = (m * a).toFixed(1);
     const parallel = (m * g * Math.sin(angle * Math.PI / 180)).toFixed(1);
     const canvasId = `fbd-${Math.random().toString(36).slice(2)}`;
 
@@ -129,56 +134,7 @@ problemsData["Unit 2: Dynamics"]["Newton's Second Law"] = [
   }
 ];
 
-
-  "Unit 3: Work, Energy, and Power": {
-    "Translational Kinetic Energy": [],
-    "Work": [],
-    "Potential Energy": [],
-    "Conservation of Energy": [],
-    "Power": []
-  },
-
-  "Unit 4: Linear Momentum": {
-    "Linear Momentum": [],
-    "Change in Momentum and Impulse": [],
-    "Conservation of Linear Momentum": [],
-    "Elastic and Inelastic Collisions": []
-  },
-
-  "Unit 5: Torque and Rotational Dynamics": {
-    "Rotational Kinematics": [],
-    "Connecting Linear and Rotational Motion": [],
-    "Torque": [],
-    "Rotational Inertia": [],
-    "Newton's First Law for Rotation": [],
-    "Newton's Second Law for Rotation": []
-  },
-
-  "Unit 6: Energy and Momentum of Rotating Systems": {
-    "Rotating Kinetic Energy": [],
-    "Torque and Work": [],
-    "Angular Momentum and Angular Impulse": [],
-    "Conservation of Angular Momentum": [],
-    "Rolling": [],
-    "Motion of Orbiting Satellites": []
-  },
-
-  "Unit 7: Oscillations": {
-    "Defining Simple Harmonic Motion": [],
-    "Frequency and Period of SHM": [],
-    "Representing and Analyzing SHM": [],
-    "Energy of Simple Harmonic Oscillators": []
-  },
-
-  "Unit 8: Fluids": {
-    "Internal Structure and Density": [],
-    "Pressure": [],
-    "Fluids and Newton's Laws": [],
-    "Fluids and Conservation Laws": []
-  }
-};
-
-// Optional helper to add problems programmatically
+// === Helper Function (Optional for future expansion) ===
 function addProblems(unit, topicProblems) {
   if (!problemsData[unit]) problemsData[unit] = {};
   Object.entries(topicProblems).forEach(([topic, problems]) => {
