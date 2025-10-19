@@ -21,7 +21,9 @@ const problemsData = {
 // Interactive problem templates based on your Sample Unit 2 Problems Template.txt
 // Students type numeric/symbolic answers; conceptual questions use multiple choice.
 
-if (!problemsData["Unit 2: Dynamics"]) problemsData["Unit 2: Dynamics"] = {};
+if (!problemsData["Unit 2: Dynamics"]) {
+  problemsData["Unit 2: Dynamics"] = {};
+}
 
 // -------------------------------------------------------
 // Topic: Forces and Free Body Diagrams (numeric/symbolic)
